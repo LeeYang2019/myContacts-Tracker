@@ -10,7 +10,7 @@ const User = require('../modals/User');
 // @route    GET api/auth
 // @desc     Get logged in user
 // @access   Private
-router.post('/', (req, res) => {
+router.get('/', (req, res) => {
   res.send('Register new user');
 });
 
@@ -24,7 +24,7 @@ router.post(
     check('password', 'Password is required').exists(),
   ],
   async (req, res) => {
-    const errors = validationResult(errors);
+    const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
