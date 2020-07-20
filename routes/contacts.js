@@ -12,9 +12,11 @@ const Contact = require('../modals/Contact');
 // @access   Private
 router.get('/', auth, async (req, res) => {
   try {
+    //find contacts by user id and sort by date in ascending order
     const contacts = await Contact.find({ user: req.user.id }).sort({
       date: -1,
     });
+    //return contacts
     res.json(contacts);
   } catch (error) {
     console.error(error.message);
@@ -28,7 +30,7 @@ router.get('/', auth, async (req, res) => {
 router.post(
   '/',
   [auth, [check('name', 'Name is required').not().isEmpty()]],
-  (req, res) => {
+  async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -47,7 +49,6 @@ router.post(
 
       const contact = await newContact.save();
       res.json(contact);
-      
     } catch (error) {
       console.error(error.message);
       res.status(500).send('Server Error');
