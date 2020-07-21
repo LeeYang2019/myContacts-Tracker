@@ -1,12 +1,19 @@
-import React, { useContext, useRef } from 'react';
+import React, { useContext, useRef, useEffect } from 'react';
 import ContactContext from '../../context/contact/ContactContext';
 
 const ContactFilter = () => {
   //bring contactContext
   const contactContext = useContext(ContactContext);
-  const { filterContacts, clearFilter } = contactContext;
+  const { filterContacts, clearFilter, filtered } = contactContext;
 
   const text = useRef('');
+
+  useEffect(() => {
+    if (filtered === null) {
+      text.current.value = '';
+      text.current.focus();
+    }
+  });
 
   const onChange = (e) => {
     if (text.current.value !== '') {
@@ -17,14 +24,14 @@ const ContactFilter = () => {
   };
 
   return (
-    <Form>
+    <form>
       <input
         ref={text}
         type="text"
         placeholder="Filter Contacts..."
         onChange={onChange}
       ></input>
-    </Form>
+    </form>
   );
 };
 
