@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import AuthContext from './AuthContext';
 import AuthReducer from './AuthReducer';
+import setAuthToken from '../../utils/setAuthToken';
 import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
@@ -13,6 +14,7 @@ import {
   LOGOUT,
   CLEAR_ERRORS,
 } from '../types';
+import { set } from 'mongoose';
 
 const AuthState = (props) => {
   const initialState = {
@@ -26,7 +28,18 @@ const AuthState = (props) => {
   const [state, dispatch] = useReducer(AuthReducer, initialState);
 
   //load user
-  const loadUser = () => console.log('loadUser');
+  const loadUser = async () => {
+    if (localStorage.token) {
+      setAuthToken(localStorage.token);
+    }
+
+    try {
+      const res = await axios.get('/api/auth');
+      dispatch({ type: USER_LOADED, payload: res.data });
+    } catch (error) {
+      dispatch({ type: AUTH_ERROR });
+    }
+  };
 
   //register user
   const register = async (formData) => {
@@ -43,6 +56,8 @@ const AuthState = (props) => {
         type: REGISTER_SUCCESS,
         payload: res.data,
       });
+
+      loadUser();
     } catch (error) {
       console.log(error.response.data.msg);
       dispatch({
