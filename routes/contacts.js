@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/auth');
 const { check, validationResult } = require('express-validator');
-
+const gravatar = require('gravatar');
 //modals
 const User = require('../modals/User');
 const Contact = require('../modals/Contact');
@@ -39,9 +39,17 @@ router.post(
     const { name, email, phone, type } = req.body;
 
     try {
+      //get users gravatar based on email
+      const avatar = gravatar.url(email, {
+        s: '200',
+        r: 'pg',
+        d: 'mm',
+      });
+
       const newContact = new Contact({
         name,
         email,
+        avatar,
         phone,
         type,
         user: req.user.id,

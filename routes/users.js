@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const { check, validationResult } = require('express-validator');
-
+const gravatar = require('gravatar');
 const User = require('../modals/User');
 
 // @route    POST api/users
@@ -30,8 +30,6 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    console.log('body', req.body);
-
     const { name, email, password } = req.body;
 
     try {
@@ -43,8 +41,15 @@ router.post(
         return res.status(400).json({ msg: 'User already exists' });
       }
 
+      //get users gravatar based on email
+      const avatar = gravatar.url(email, {
+        s: '200',
+        r: 'pg',
+        d: 'mm',
+      });
+
       //create a new user modal
-      user = new User({ name, email, password });
+      user = new User({ name, email, avatar, password });
 
       //hash the password
       const salt = await bcrypt.genSalt(10);

@@ -3,6 +3,12 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import AuthContext from '../../context/auth/AuthContext';
 import ContactContext from '../../context/contact/ContactContext';
+import styled from 'styled-components';
+
+const StyledImage = styled.img`
+  width: 50px;
+  border-radius: 50%;
+`;
 
 const Navbar = ({ icon, title }) => {
   const authContext = useContext(AuthContext);
@@ -18,7 +24,14 @@ const Navbar = ({ icon, title }) => {
 
   const authLinks = (
     <Fragment>
-      <li>Hello {user && user.name}</li>
+      <li>
+        Hello{' '}
+        <StyledImage
+          className="userProfile"
+          src={user && user.avatar}
+          alt="image of user"
+        />
+      </li>
       <li>
         <a onClick={onLogout} href="#!">
           <i className="fas fa-sign-out-alt"></i>
