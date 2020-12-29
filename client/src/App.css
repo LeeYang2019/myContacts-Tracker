@@ -20,8 +20,8 @@ body {
 	font-size: 1rem;
 	line-height: 1.6;
 	/* background-color: #fff; */
-	background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-		url(./assets/mobile-phone-1087845_1920.jpg);
+	background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)),
+		url(./assets/landscape.png);
 	background-size: cover;
 	color: #333;
 }

@@ -1,29 +1,29 @@
 {
-  "name": "contact-keeper",
-  "version": "1.0.0",
-  "description": "contacts keeper",
-  "main": "server.js",
-  "license": "MIT",
-  "scripts": {
-    "start": "node server.js",
-    "server": "nodemon server.js",
-    "client": "cd client && yarn start",
-    "clientinstall": "yarn install --prefix client",
-    "dev": "concurrently -r -k \"yarn run server\" \" yarn run client\""
-  },
-  "dependencies": {
-    "@material-ui/core": "^4.11.0",
-    "bcryptjs": "^2.4.3",
-    "config": "^3.3.1",
-    "express": "^4.17.1",
-    "express-validator": "^6.6.0",
-    "gravatar": "^1.8.1",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.9.24",
-    "styled-components": "^5.2.0"
-  },
-  "devDependencies": {
-    "concurrently": "^5.2.0",
-    "nodemon": "^2.0.4"
-  }
+	"name": "contact-keeper",
+	"version": "1.0.0",
+	"description": "contacts keeper",
+	"main": "server.js",
+	"license": "MIT",
+	"scripts": {
+		"start": "node server.js",
+		"server": "nodemon server.js",
+		"client": "yarn --cwd client start",
+		"clientinstall": "yarn install --prefix client",
+		"dev": "concurrently \"yarn run server\" \" yarn run client\""
+	},
+	"dependencies": {
+		"@material-ui/core": "^4.11.0",
+		"bcryptjs": "^2.4.3",
+		"config": "^3.3.1",
+		"express": "^4.17.1",
+		"express-validator": "^6.6.0",
+		"gravatar": "^1.8.1",
+		"jsonwebtoken": "^8.5.1",
+		"mongoose": "^5.9.24",
+		"styled-components": "^5.2.0"
+	},
+	"devDependencies": {
+		"concurrently": "^5.2.0",
+		"nodemon": "^2.0.4"
+	}
 }

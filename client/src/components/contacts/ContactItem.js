@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 import ButtonBase from '@material-ui/core/ButtonBase';
 
 const useStyles = makeStyles((theme) => ({
@@ -16,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
 		padding: theme.spacing(2),
 		margin: 'auto',
 		maxWidth: 500,
+		backgroundColor: 'rgba(255,255,255,.75)',
 	},
 	image: {
 		width: 128,
@@ -27,6 +29,12 @@ const useStyles = makeStyles((theme) => ({
 		display: 'block',
 		maxWidth: '100%',
 		maxHeight: '100%',
+	},
+	button: {
+		borderRadius: '10%',
+		padding: '0.125rem 0.75rem',
+		marginRight: '.75rem',
+		fontSize: '.75rem',
 	},
 }));
 
@@ -47,12 +55,12 @@ const ContactItem = ({ contact }) => {
 		<div className={classes.root}>
 			<Paper className={classes.paper}>
 				<Grid container spacing={2}>
-					<Grid item>
+					<Grid item xs={4}>
 						<ButtonBase className={classes.image}>
 							<img className={classes.img} alt="complex" src={avatar} />
 						</ButtonBase>
 					</Grid>
-					<Grid item xs={12} sm container>
+					<Grid item xs={8} sm container>
 						<Grid item xs container direction="column" spacing={2}>
 							<Grid item xs>
 								<Typography gutterBottom variant="subtitle1">
@@ -66,15 +74,24 @@ const ContactItem = ({ contact }) => {
 								</Typography>
 							</Grid>
 							<Grid item>
-								<button
-									className="btn btn-dark btn-sm"
+								<Button
+									className={classes.button}
+									variant="contained"
+									color="primary"
+									disableElevation
 									onClick={() => setCurrent(contact)}
 								>
 									<i className="fas fa-edit"></i> Edit
-								</button>
-								<button className="btn btn-danger btn-sm" onClick={onDelete}>
+								</Button>
+								<Button
+									className={classes.button}
+									variant="contained"
+									color="secondary"
+									disableElevation
+									onClick={onDelete}
+								>
 									<i className="fas fa-trash"></i> Delete
-								</button>
+								</Button>
 							</Grid>
 						</Grid>
 						<Grid item>
