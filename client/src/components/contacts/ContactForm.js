@@ -69,18 +69,18 @@ const ContactForm = () => {
 				value={email}
 				onChange={onChange}
 			/>
-			{/* <input
+			<input
 				type="text"
 				placeholder="Phone"
 				name="phone"
 				value={phone}
 				onChange={onChange}
-			/> */}
-			<IntlTelInput
+			/>
+			{/* <IntlTelInput
 				value={phone}
 				onPhoneNumberChange={onChange}
 				// onPhoneNumberBlur={onBlur()}
-			/>
+			/> */}
 			<h5>Contact Type</h5>
 			<input
 				type="radio"

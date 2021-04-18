@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { useRouteMatch, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ContactContext from '../../context/contact/ContactContext';
 import { makeStyles } from '@material-ui/core/styles';
@@ -11,7 +12,7 @@ import ButtonBase from '@material-ui/core/ButtonBase';
 const useStyles = makeStyles((theme) => ({
 	root: {
 		flexGrow: 1,
-		marginBottom: 25,
+		marginBottom: 5,
 	},
 	paper: {
 		padding: theme.spacing(2),
@@ -20,8 +21,8 @@ const useStyles = makeStyles((theme) => ({
 		backgroundColor: 'rgba(255,255,255,.75)',
 	},
 	image: {
-		width: 128,
-		height: 128,
+		width: '75px',
+		height: '75px',
 	},
 	img: {
 		borderRadius: '50%',
@@ -39,6 +40,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ContactItem = ({ contact }) => {
+	const { url } = useRouteMatch();
+
 	const contactContext = useContext(ContactContext);
 	const { deleteContact, setCurrent, clearCurrent } = contactContext;
 
@@ -53,27 +56,28 @@ const ContactItem = ({ contact }) => {
 
 	return (
 		<div className={classes.root}>
-			<Paper className={classes.paper}>
-				<Grid container spacing={2}>
-					<Grid item xs={4}>
-						<ButtonBase className={classes.image}>
-							<img className={classes.img} alt="complex" src={avatar} />
-						</ButtonBase>
-					</Grid>
-					<Grid item xs={8} sm container>
-						<Grid item xs container direction="column" spacing={2}>
-							<Grid item xs>
-								<Typography gutterBottom variant="subtitle1">
-									{name}
-								</Typography>
-								<Typography variant="body2" gutterBottom>
-									{email}
-								</Typography>
-								<Typography variant="body2" color="textSecondary">
-									{phone}
-								</Typography>
-							</Grid>
-							<Grid item>
+			<Link to={`${url}/contact/${_id}`}>
+				<Paper className={classes.paper}>
+					<Grid container spacing={1}>
+						<Grid item xs={4}>
+							<ButtonBase className={classes.image}>
+								<img className={classes.img} alt="complex" src={avatar} />
+							</ButtonBase>
+						</Grid>
+						<Grid item xs={8} sm container>
+							<Grid item xs container direction="column" spacing={1}>
+								<Grid item xs>
+									<Typography gutterBottom variant="subtitle1">
+										{name}
+									</Typography>
+									<Typography variant="body2" gutterBottom>
+										{email}
+									</Typography>
+									<Typography variant="body2" color="textSecondary">
+										{phone}
+									</Typography>
+								</Grid>
+								{/* <Grid item>
 								<Button
 									className={classes.button}
 									variant="contained"
@@ -92,14 +96,15 @@ const ContactItem = ({ contact }) => {
 								>
 									<i className="fas fa-trash"></i> Delete
 								</Button>
+							</Grid> */}
 							</Grid>
-						</Grid>
-						<Grid item>
+							{/* <Grid item>
 							<Typography variant="subtitle1">{type}</Typography>
+						</Grid> */}
 						</Grid>
 					</Grid>
-				</Grid>
-			</Paper>
+				</Paper>
+			</Link>
 		</div>
 	);
 };
