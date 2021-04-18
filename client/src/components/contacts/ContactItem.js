@@ -39,9 +39,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const ContactItem = ({ contact }) => {
-	const { url } = useRouteMatch();
-
+const ContactItem = ({ contact, url }) => {
 	const contactContext = useContext(ContactContext);
 	const { deleteContact, setCurrent, clearCurrent } = contactContext;
 

@@ -5,9 +5,8 @@ import ContactItem from './ContactItem';
 import ContactContext from '../../context/contact/ContactContext';
 import Spinner from '../layout/Spinner';
 
-const Contacts = () => {
+const Contacts = ({ url }) => {
 	const contactContext = useContext(ContactContext);
-	const { url, path } = useRouteMatch();
 	const { contacts, filtered, getContact, loading } = contactContext;
 
 	useEffect(() => {
@@ -29,6 +28,7 @@ const Contacts = () => {
 									key={contact._id}
 									timeout={500}
 									classNames="item"
+									url={url}
 								>
 									<ContactItem contact={contact} />
 								</CSSTransition>
@@ -38,6 +38,7 @@ const Contacts = () => {
 									key={contact._id}
 									timeout={500}
 									classNames="item"
+									url={url}
 								>
 									<ContactItem contact={contact} />
 								</CSSTransition>
